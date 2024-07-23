@@ -1,0 +1,40 @@
+{
+  "name": "bundler",
+  "version": "1.0.0",
+  "description": "Тошина сборка",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToryaToria/5_Sborka.git"
+  },
+  "author": "ToryaToria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ToryaToria/5_Sborka/issues"
+  },
+  "homepage": "https://github.com/ToryaToria/5_Sborka#readme",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^18.18 || ^20.9"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "not op_mini all",
+    "not and_uc > 0",
+    "not < 0.2%"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "gulp": "^5.0.0",
+    "gulp-dart-sass": "^1.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^10.0.0"
+  },
+  "scripts": {
+    "test": "echo \\\"Моя первая сборка\\\" && exit 1",
+    "start": "gulp"
+
+  }
+}
