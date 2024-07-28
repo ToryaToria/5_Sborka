@@ -44,34 +44,34 @@ export function lintBem () {
     .pipe(bemlinter());
 }
 
-export function processStyles () {
-  return src(`${PATH_TO_SOURCE}styles/*.scss`, { sourcemaps: isDevelopment })
-    .pipe(plumber())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(postcss([
-      postUrl([
-        {
-          filter: '**/*',
-          assetsPath: '../',
-        },
-        {
-          filter: '**/icons/**/*.svg',
-          url: (asset) => asset.url.replace(
-            /icons\/(.+?)\.svg$/,
-            (match, p1) => `icons/stack.svg#${p1.replace(/\//g, '_')}`
-          ),
-          multi: true,
-        },
-      ]),
-      lightningcss({
-        lightningcssOptions: {
-          minify: !isDevelopment,
-        },
-      })
-    ]))
-    .pipe(dest(`${PATH_TO_DIST}styles`, { sourcemaps: isDevelopment }))
-    .pipe(server.stream());
-}
+// export function processStyles () {
+//   return src(`${PATH_TO_SOURCE}styles/*.scss`, { sourcemaps: isDevelopment })
+//     .pipe(plumber())
+//     .pipe(sass().on('error', sass.logError))
+//     .pipe(postcss([
+//       postUrl([
+//         {
+//           filter: '**/*',
+//           assetsPath: '../',
+//         },
+//         {
+//           filter: '**/icons/**/*.svg',
+//           url: (asset) => asset.url.replace(
+//             /icons\/(.+?)\.svg$/,
+//             (match, p1) => `icons/stack.svg#${p1.replace(/\//g, '_')}`
+//           ),
+//           multi: true,
+//         },
+//       ]),
+//       lightningcss({
+//         lightningcssOptions: {
+//           minify: !isDevelopment,
+//         },
+//       })
+//     ]))
+//     .pipe(dest(`${PATH_TO_DIST}styles`, { sourcemaps: isDevelopment }))
+//     .pipe(server.stream());
+// }
 
 export function processScripts () {
   const gulpEsbuild = createGulpEsbuild({ incremental: isDevelopment });

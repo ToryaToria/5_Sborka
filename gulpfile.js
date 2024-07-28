@@ -1,4 +1,9 @@
+
+import { readFileSync, rmSync } from 'node:fs';
+
 import gulp from 'gulp';
+
+
 import plumber from 'gulp-plumber';
 import sass from 'gulp-dart-sass';
 import postcss from 'gulp-postcss';
@@ -55,28 +60,34 @@ export const styles = () => {
 }
 
 // из #19, разберем?
-
-// .pipe(postcss([
-//   postUrl([
-//     {
-//       filter: '**/*',
-//       assetsPath: '../',
-//     },
-//     {
-//       filter: '**/icons/**/*.svg',
-//       url: (asset) => asset.url.replace(
-//         /icons\/(.+?)\.svg$/,
-//         (match, p1) => `icons/stack.svg#${p1.replace(/\//g, '_')}`
-//       ),
-//       multi: true,
-//     },
-//   ]),
-//   lightningcss({
-//     lightningcssOptions: {
-//       minify: !isDevelopment,
-//     },
-//   })
-// ]))
+export function processStyles () {
+  return src(`${PATH_TO_SOURCE}styles/*.scss`, { sourcemaps: isDevelopment })
+    .pipe(plumber())
+    .pipe(sass().on('error', sass.logError))
+    .pipe(postcss([
+      postUrl([
+        {
+          filter: '**/*',
+          assetsPath: '../',
+        },
+        {
+          filter: '**/icons/**/*.svg',
+          url: (asset) => asset.url.replace(
+            /icons\/(.+?)\.svg$/,
+            (match, p1) => `icons/stack.svg#${p1.replace(/\//g, '_')}`
+          ),
+          multi: true,
+        },
+      ]),
+      lightningcss({
+        lightningcssOptions: {
+          minify: !isDevelopment,
+        },
+      })
+    ]))
+    .pipe(dest(`${PATH_TO_DIST}styles`, { sourcemaps: isDevelopment }))
+    .pipe(server.stream());
+}
 
 
 /* ================================================== */
@@ -84,10 +95,17 @@ export const styles = () => {
 
 // HTML
 
-const html = () => {
-	return gulp.src('source/*.html')
-		.pipe(htmlmin({ collapseWhitespace: !isDevelopment }))
-		.pipe(gulp.dest('build'));
+// const html = () => {
+// 	return gulp.src('source/*.html')
+// 		.pipe(htmlmin({ collapseWhitespace: !isDevelopment }))
+// 		.pipe(gulp.dest('build'));
+// }
+
+export function processMarkup () {  //оптимизация HTML
+  return src(`${PATH_TO_SOURCE}**/*.html`)
+    .pipe(htmlmin({ collapseWhitespace: !isDevelopment }))
+    .pipe(dest(PATH_TO_DIST))
+    .pipe(browser.stream());
 }
 
 /* ================================================== */
