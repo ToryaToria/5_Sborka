@@ -1,0 +1,48 @@
+.hamburger {
+  display: block;
+  // display: none;
+  width: 24px;
+  height: 24px;
+
+  box-sizing: border-box;
+  position: relative;
+  border: none;
+  padding: 0;
+  background-color: $color-white;
+  cursor: pointer;
+
+  @include media-tablet {
+    display: none;
+  }
+}
+
+.hamburger--open {
+  &::before {
+    content: "";
+
+    @include hamburger-line;
+    top: 1px;
+    left: 0;
+
+    box-shadow: 0 9px 0 0 #000000, 0 18px 0 0 #000000;
+  }
+}
+
+.hamburger--closed {
+  &::after,
+  &::before {
+    content: "";
+
+    @include hamburger-line;
+    top: calc(50% - 1px);
+    right: -3px;
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+}

@@ -1,0 +1,129 @@
+.additional-products {
+  padding-top: 24px;
+
+  @include media-tablet {
+    padding-top: 21px;
+  }
+
+  @include media-desktop {
+    padding-top: 22px;
+  }
+}
+
+.additional-products__title {
+  margin-bottom: 36px;
+
+  @include media-tablet {
+    margin-bottom: 80px;
+  }
+}
+
+.additional-products__wrapp {
+  @include media-desktop {
+    display: flex;
+    gap: 80px;
+  }
+}
+
+.additional-products__list {
+  @include list-reset;
+
+  @include media-tablet {
+    border-top: 1px solid $color-border-3;
+    border-left: 1px solid $color-border-3;
+    border-right: 1px solid $color-border-3;
+  }
+
+  @include media-desktop {
+    flex-grow: 1;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+.additional-products__card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "title title"
+    "descr data"
+    "btn btn";
+  gap: 10px;
+
+  text-align: start;
+  align-items: center;
+
+  padding-top: 10px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid $color-border-3;
+
+  @include media-tablet {
+    padding: 25px 38px 27px;
+    align-items: baseline;
+
+    grid-template-columns: 347px auto 92px;
+
+    grid-template-areas:
+      "title descr data"
+      "btn btn btn";
+    gap: 15px 0;
+  }
+
+  @include media-desktop {
+    grid-template-columns: auto 233px 73px 244px;
+    align-items: baseline;
+    padding: 10px 0 15px;
+    grid-template-areas: "title descr data btn";
+    gap: 10px;
+  }
+}
+
+.additional-products__title-card {
+  grid-area: title;
+  text-align: start;
+}
+
+.additional-products__description {
+  text-align: left;
+  grid-area: descr;
+
+  @include media-tablet {
+    text-align: right;
+  }
+
+  @include media-desktop {
+    text-align: left;
+  }
+}
+
+.additional-products__data {
+  text-align: right;
+  grid-area: data;
+
+  @include media-desktop {
+    text-align: left;
+  }
+}
+
+.additional-products__button {
+  margin-top: 6px;
+  grid-area: btn;
+
+  @include media-desktop {
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+}
+
+.additional-products__lid {
+  margin-top: 37px;
+
+  @include media-tablet {
+    margin-top: 70px;
+  }
+
+  @include media-desktop {
+    margin-top: 0;
+    width: 245px;
+  }
+}

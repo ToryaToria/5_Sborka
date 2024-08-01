@@ -1,0 +1,25 @@
+.page {
+  /*  для стики-футера*/
+  height: 100%;
+}
+
+.page__body {
+  position: relative;
+
+  margin: 0 auto;
+  background-color: $color-white;
+
+  min-width: $mobile-width;
+
+  outline: 1px solid #ff0000;
+
+  /*  для стики-футера*/
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+// .page__main {
+//   /*  для стики-футера*/
+//   flex-grow: 1;
+// }

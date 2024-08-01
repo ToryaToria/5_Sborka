@@ -1,0 +1,33 @@
+.social {
+  @include list-reset;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  border-top: 1px solid $color-border-2;
+  border-bottom: 1px solid $color-border-2;
+
+  @include media-tablet {
+    border-top: none;
+    border-bottom: none;
+    padding-top: 15px;
+    padding-bottom: 7px;
+    max-width: 300px;
+  }
+}
+
+.social__link::before {
+  transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.social__link:hover::before {
+  background-color: $color-bg-base;
+}
+
+.social__link:active::before {
+  opacity: 0.3;
+}

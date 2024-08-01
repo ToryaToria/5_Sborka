@@ -1,0 +1,80 @@
+.control {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  width: fit-content;
+  cursor: pointer;
+
+  @include media-tablet {
+    gap: 19px;
+  }
+}
+
+.control__mark-radio,
+.control__mark-check {
+  position: relative;
+  display: inline-block;
+
+  width: 28px;
+  height: 28px;
+
+  background-color: $color-white;
+  border: 1px solid $color-border-3;
+
+  @include media-tablet {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.control__mark-radio {
+  border-radius: 50%;
+}
+
+
+.control__input[type="radio"]:checked + .control__mark-radio::before {
+  content: "";
+  display: block;
+  width: 13px;
+  height: 13px;
+  background-color: $color-bg-base;
+  border-radius: 50%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @include media-tablet {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.control__input[type="checkbox"]:checked + .control__mark-check::before {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 14px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-image: url("../../img/tmp/tick.svg");
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+}
+
+.control__input:disabled + .control__mark-radio,
+.control__input:disabled + .control__mark-check,
+.control__input:disabled ~ .control__label {
+  opacity: 0.3;
+}
+
+.control__input:not(:disabled):hover + .control__mark-radio,
+.control__input:not(:disabled):hover + .control__mark-check {
+  border-color: $color-border-hover;
+}

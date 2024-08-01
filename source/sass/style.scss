@@ -1,0 +1,50 @@
+// Начните писать стили здесь
+
+
+//BASE
+@import "./base/variables.scss";
+@import "./base/mixins.scss";
+@import "./base/fonts.scss";
+// @import "./base/base.scss";
+@import "./base/no-js.scss";
+@import "./base/visible.scss";
+@import "./base/visually-hidden";
+@import "./base/page";
+@import "./base/container.scss";
+@import "./base/button.scss";
+@import "./base/transfer-block.scss";
+@import "./base/outlines.scss";
+
+
+// BLOCKS
+@import "./blocks/icon.scss";
+@import "./blocks/logo-link.scss";
+@import "./blocks/main-nav.scss";
+@import "./blocks/hamburger.scss";
+@import "./blocks/hero.scss";
+@import "./blocks/results.scss";
+@import "./blocks/result-item.scss";
+@import "./blocks/features.scss";
+@import "./blocks/examples.scss";
+@import "./blocks/property.scss";
+@import "./blocks/main-footer.scss";
+@import "./blocks/contacts.scss";
+@import "./blocks/social.scss";
+@import "./blocks/transfer-block.scss";
+@import "./blocks/slider.scss";
+
+
+// BLOCKS catalog
+
+@import "./blocks/catalog-main.scss";
+@import "./blocks/product-card.scss";
+@import "./blocks/main-products.scss";
+@import "./blocks/additional-products.scss";
+@import "./blocks/product-footer.scss";
+
+
+// BLOCKS form
+
+@import "./blocks/form-main.scss";
+@import "./blocks/form.scss";
+@import "./blocks/control.scss";

@@ -1,0 +1,144 @@
+.examples {
+  background-color: $color-bg-examples;
+
+  @include media-tablet {
+    // background-color: $color-white;
+    border-top: 1px solid $color-border;
+    background-image: linear-gradient($color-white 619px, $color-bg-examples 619px);
+    padding-bottom: 101px;
+  }
+
+  @include media-desktop {
+    border-top: none;
+    background-image: linear-gradient($color-white 135px, $color-bg-grey 135px);
+    padding-bottom: 75px;
+  }
+}
+
+.examples__container {
+  padding-top: 25px;
+  padding-bottom: 40px;
+
+  @include media-tablet {
+    padding-top: 45px;
+    padding-bottom: 0;
+  }
+
+  @include media-desktop {
+    padding-top: 0;
+  }
+}
+
+.examples__title {
+  margin-bottom: 40px;
+
+  @include media-tablet {
+    margin-bottom: 60px;
+  }
+
+  @include media-desktop {
+    margin-bottom: 146px;
+  }
+}
+
+.examples__wrap-horison {
+  @include media-desktop {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.examples__content-wrapp {
+  @include media-desktop {
+    // margin-top: 70px;
+    // margin-bottom: 75px;
+    width: 436px;
+  }
+}
+
+.examples__description {
+  margin-bottom: 20px;
+
+  @include media-tablet {
+    margin-bottom: 55px;
+  }
+
+  @include media-desktop {
+    margin-bottom: 69px;
+  }
+}
+
+.examples__packing {
+  @include media-tablet {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 104px;
+    align-items: center;
+  }
+
+  @include media-desktop {
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 0;
+  }
+}
+
+.examples__wrapp {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 35px;
+
+
+  @include media-tablet {
+    gap: 43px;
+    // max-width: 384px;
+    margin-bottom: 0;
+  }
+
+  @include media-desktop {
+    // max-width: 366px;
+    gap: 42px;
+    margin-bottom: 60px;
+  }
+}
+
+.examples__costs {
+  margin-bottom: 24px;
+  text-align: center;
+  color: $color-black;
+
+  @include media-tablet {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    gap: 9px;
+    margin-bottom: 0;
+  }
+
+  @include media-desktop {
+    flex-direction: row;
+    gap: 66px;
+  }
+}
+
+.examples__slider {
+  box-sizing: border-box;
+  margin: 0 auto;
+
+  display: grid;
+  place-items: center;
+  width: 280px;
+  height: 256px;
+  outline: 2px solid #ff6347;
+
+  @include media-tablet {
+    width: 560px;
+    height: 512px;
+  }
+
+  @include media-desktop {
+    background-color: transparent;
+    margin: 0;
+  }
+}

@@ -1,0 +1,50 @@
+.button {
+  padding: 10px 20px;
+  display: block;
+  background-color: #68b738;
+
+  transition: background-color 2s ease-in-out;
+
+  &:hover {
+    background-color: $color-bg-base-hover;
+  }
+
+  &:active {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  &--secondary {
+    color: $color-base-text;
+    background-color: $color-bg-grey;
+
+    &:hover {
+      background-color: $color-border-4;
+    }
+
+    &:active {
+      color: $color-base-text;
+    }
+  }
+
+
+  @include media-tablet {
+    &--big {
+      padding: 14px 26px;
+      display: inline-block;
+    }
+
+    &--form {
+      padding: 14px 66px;
+    }
+  }
+
+  @include media-desktop {
+    &--big {
+      padding: 14px 27px;
+    }
+
+    &--form {
+      padding: 14px 208px;
+    }
+  }
+}

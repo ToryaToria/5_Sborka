@@ -1,0 +1,15 @@
+.catalog-main {
+  padding-top: 27px;
+  padding-bottom: 35px;
+  border-top: 1px solid $color-border-2;
+
+  @include media-tablet {
+    padding-top: 44px;
+    padding-bottom: 75px;
+    border-top: none;
+  }
+
+  @include media-desktop {
+    padding-bottom: 85px;
+  }
+}

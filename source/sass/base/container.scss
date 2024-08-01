@@ -1,0 +1,18 @@
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include media-tablet {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @include media-desktop {
+    padding-left: 110px;
+    padding-right: 110px;
+    max-width: $desktop-width;
+  }
+}

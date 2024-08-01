@@ -1,0 +1,9 @@
+@media (max-width: 767px) {
+  .no-js .hamburger {
+    display: none;
+  }
+
+  body:not(.no-js) .main-nav__list:not(.visible) {
+    display: none;
+  }
+}

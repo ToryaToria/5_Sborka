@@ -1,0 +1,21 @@
+.results__container {
+  padding-top: 10px;
+  padding-bottom: 9px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include media-tablet {
+    padding-top: 0;
+    gap: 30px;
+    padding-bottom: 45px;
+  }
+
+  @include media-desktop {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    padding-bottom: 71px;
+  }
+}

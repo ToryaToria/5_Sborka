@@ -1,0 +1,41 @@
+.form-main__container {
+  border-top: 1px solid #d9d9d9;
+  padding-top: 27px;
+  padding-bottom: 30px;
+
+  @include media-tablet {
+    border-top: none;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @include media-desktop {
+    padding-top: 45px;
+    padding-bottom: 79px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.form-main__title {
+  margin-bottom: 37px;
+
+  @include media-tablet {
+    margin-bottom: 54px;
+  }
+
+  @include media-desktop {
+    margin-bottom: 55px;
+  }
+}
+
+.form-main__lid {
+  padding-right: 54px;
+  padding-bottom: 39px;
+
+  @include media-tablet {
+    padding-bottom: 66px;
+  }
+}

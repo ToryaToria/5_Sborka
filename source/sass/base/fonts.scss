@@ -1,0 +1,242 @@
+/*===================== шрифты ===========================*/
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../fonts/lato/Lato-Regular.woff2") format("woff2"),
+    url("../../fonts/lato/Lato-Regular.woff") format("woff");
+
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../fonts/oswald/oswaldregular.woff2") format("woff2"),
+    url("../../fonts/oswald/oswaldregular.woff") format("woff");
+  font-display: swap;
+}
+
+.basic-text {
+  @include font ($family: $font-base, $size: 14px, $line-height: 18px, $color: $color-base-text, $upper: none);
+
+  @include media-tablet {
+    @include font ($family: $font-base, $size: 16px, $line-height: 24px, $color: $color-black, $upper: none);
+  }
+}
+
+.main-title {
+  /* h1 */
+
+  @include font ($size: 36px, $line-height: 36px, $color: $color-white, $upper: none);
+
+  &--second-pares {
+    color: $color-black;
+  }
+
+  @include media-tablet {
+    @include font ($size: 60px, $line-height: 60px, $color: $color-black, $upper: none);
+  }
+}
+
+.section-title {
+  /* h2 */
+
+  @include font ($size: 36px, $line-height: 40px, $upper: none);
+
+  @include media-tablet {
+    @include font ($size: 60px, $line-height: 60px, $color: $color-black, $upper: none);
+  }
+}
+
+.subtitle {
+  /* h3 */
+
+  @include font ($size: 24px, $line-height: 37px);
+
+  @include media-tablet {
+    @include font ($size: 36px, $line-height: 36px);
+  }
+}
+
+.nav-text {
+  /* ссылки в меню */
+
+  @include font ($size: 20px, $line-height: 20px);
+  text-decoration: none;
+
+  @include media-tablet {
+    @include font ($size: 18px, $line-height: 24px);
+  }
+
+  @include media-desktop {
+    color: $color-second-text;
+
+    @include font ($size: 20px, $line-height: 24px);
+
+    &--index {
+      color: $color-white;
+    }
+  }
+}
+
+.slogan {
+  /* слоган в Hero */
+
+  @include font ($size: 14px, $line-height: 14px, $color: $color-white);
+
+  @include media-tablet {
+    @include font ($size: 20px, $line-height: 20px, $color: $color-second-text);
+  }
+}
+
+.slogan-2 {
+  /* слоган в examples */
+
+  @include font ($size: 16px, $line-height: 20px, $color: $color-second-text);
+
+  @include media-tablet {
+    @include font ($size: 20px, $line-height: 26px, $color: $color-second-text);
+  }
+
+  @include media-desktop {
+    @include font ($size: 20px, $line-height: 24px, $color: $color-second-text);
+  }
+}
+
+.button-text {
+  /* кнопка */
+
+  @include font ($size: 16px, $line-height: 20px, $color: $color-white);
+
+  text-decoration: none;
+  text-align: center;
+
+  &--big {
+    @include media-tablet {
+      @include font ($size: 20px, $line-height: 26px, $color: $color-white);
+    }
+  }
+}
+
+.link-text {
+  @include font ($size: 16px, $line-height: 16px);
+  text-decoration: none;
+
+  @include media-tablet {
+    @include font ($size: 20px, $line-height: 26px);
+  }
+}
+
+.product-title {
+  @include font ($size: 16px, $line-height: 20px, $color: $color-product-title);
+
+  @include media-tablet {
+    @include font ($size: 20px, $line-height: 24px, $color: $color-product-title);
+    text-align: center;
+  }
+}
+
+.second-page-title {
+  @include font ($size: 24px, $line-height: 26px, $upper: none);
+  box-sizing: border-box;
+  position: relative;
+  width: fit-content;
+  margin-left: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  background-color: $color-white;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    right: 0;
+    z-index: -1;
+
+    display: block;
+    height: 2px;
+    width: 100vw;
+
+    background-color: $color-bg-base;
+    box-shadow: 100vw 0 0 0 $color-bg-base;
+  }
+
+  @include media-tablet {
+    @include font ($size: 36px, $line-height: 36px, $upper: none);
+
+    width: fit-content;
+    margin-left: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    &::before {
+      top: 23px;
+    }
+  }
+
+  @include media-desktop {
+
+    margin-left: -40px;
+
+    // padding-left: 150px;
+    // padding-right: 40px;
+    // &::before {
+    //   top: 25px;
+    // }
+  }
+}
+
+.product-lid-txt {
+  @include font ($family: $font-base, $size: 16px, $line-height: 20px, $color: $color-white, $upper: none);
+}
+
+.form-lid-text {
+  @include font ($size: 14px, $line-height: 18px, $color: $color-black);
+
+  @include media-tablet {
+    @include font ($size: 20px, $line-height: 30px, $color: $color-black);
+  }
+}
+
+.form-txt {
+  @include font ($size: 16px, $line-height: 18px, $color: $color-base-text);
+
+  @include media-tablet {
+    @include font ($size: 20px, $line-height: 26px, $color: $color-base-text);
+  }
+}
+
+.property-text {
+  @include font ($family: $font-base, $size: 12px, $line-height: 12px, $upper: none, $color: $color-base-text);
+
+  @include media-tablet {
+    @include font ($family: $font-base, $size: 14px, $line-height: 14px, $upper: none, $color: $color-base-text);
+  }
+}
+
+.property-text-catalog {
+  @include font ($family: $font-base, $size: 12px, $line-height: 16px, $upper: none, $color: $color-base-text);
+
+  @include media-tablet {
+    @include font ($family: $font-base, $size: 16px, $line-height: 20px, $upper: none, $color: $color-base-text);
+  }
+}
+
+.property-text-addition {
+  @include font ($family: $font-base, $size: 14px, $line-height: 14px, $upper: none, $color: $color-base-text);
+
+  @include media-tablet {
+    @include font ($family: $font-base, $size: 16px, $line-height: 20px, $upper: none, $color: $color-base-text);
+  }
+}
+
+.address-text {
+  @include font ($family: $font-base, $size: 14px, $line-height: 20px, $color: $color-base-text, $upper: none);
+
+  @include media-tablet {
+    @include font ($family: $font-base, $size: 16px, $line-height: 20px, $color: $color-base-text, $upper: none);
+  }
+}

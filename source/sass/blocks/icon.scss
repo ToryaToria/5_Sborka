@@ -1,0 +1,204 @@
+.icon {
+  overflow: visible;
+
+  @include icon;
+
+  &::before {
+    content: "";
+
+    @include icon;
+  }
+
+  &::after {
+    content: "";
+
+    @include icon;
+  }
+}
+
+.icon--round::before {
+  background-color: $color-bg-base;
+  border-radius: 50%;
+
+  width: 50px;
+  height: 50px;
+
+  @include media-tablet {
+    width: 200px;
+    height: 200px;
+  }
+
+  @include media-desktop {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.icon--square::before {
+  width: 60px;
+  height: 60px;
+  background-color: $color-bg-base;
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+
+  @include media-tablet {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.icon--slim::after,
+.icon--fat::after {
+  width: 67px;
+  height: 50px;
+  background-position: center;
+
+  @include media-tablet {
+    width: 268px;
+    height: 194px;
+  }
+
+  @include media-desktop {
+    width: 134px;
+    height: 97px;
+  }
+}
+
+.icon--slim::after {
+
+  position: absolute;
+  top: -3px;
+  right: 181px;
+
+  background-size: 36px 50px;
+  background-image: url("../../img/stek.svg#cat-slim");
+
+  @include media-tablet {
+    background-size: 140px 194px;
+
+    top: 4px;
+    right: -287px;
+  }
+
+  @include media-desktop {
+    background-size: 70px 97px;
+    top: -6px;
+    right: 340px;
+  }
+}
+
+.icon--fat::after {
+
+  position: absolute;
+  top: 0;
+  right: 181px;
+
+  // background-size: 167px 28px;
+
+  background-image: url("../../img/stek.svg#cat-pro");
+
+  // background-color: #b891e4;
+
+  @include media-tablet {
+    //   background-size: 268px 112px;
+    top: 16px;
+    right: -287px;
+  }
+
+  @include media-desktop {
+    //   background-size: 134px 56px;
+
+    top: 0;
+    right: 342px;
+  }
+}
+
+.icon--leaf::before {
+  background-size: 30px 32px;
+  background-image: url("../../img/stek.svg#icon_leaf");
+}
+
+.icon--bowl::before {
+  background-size: 26px 29px;
+  background-image: url("../../img/stek.svg#icon-bowl");
+}
+
+.icon--eat::before {
+  background-size: 26px 30px;
+  background-image: url("../../img/stek.svg#icon_eat");
+}
+
+.icon--time::before {
+  background-size: 26px 31px;
+  background-image: url("../../img/stek.svg#icon-time");
+}
+
+.icon--arrow::after {
+  width: 32px;
+  height: 12px;
+  background-image: url("../../img/stek.svg#icon_arrow");
+  background-position: -7px;
+  transition: background-position 0.3s ease-in-out;
+}
+
+.icon--arrow:hover::after {
+  background-position: right;
+}
+
+.icon--social {
+  display: block;
+  width: 28px;
+  height: 22px;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 22px;
+
+    background-color: $color-footer-icons;
+
+    mask-repeat: no-repeat;
+    mask-size: 28px 22px;
+    mask-position: center;
+  }
+}
+
+.icon--vk::before {
+  mask-image: url("../../img/stek.svg#vkontakte");
+}
+
+.icon--youtube::before {
+  mask-image: url("../../img/stek.svg#youtube");
+}
+
+.icon--telegramm::before {
+  mask-image: url("../../img/stek.svg#telegram");
+}
+
+.icon--email::before,
+.icon--phone::before {
+  content: none;
+}
+
+.icon--email::after {
+  mask-image: url("../../img/stek.svg#icon-email");
+  background-color: $color-black;
+}
+
+.icon--phone::after {
+  background-color: $color-black;
+  mask-image: url("../../img/stek.svg#icon-phone");
+}
+
+.icon__energy-color {
+  @include media-tablet {
+    fill: #444444;
+  }
+}
+
+.icon__htmlacademy-logo {
+  fill: $color-footer-icons;
+  transition: background-color 0.3s ease-in-out;
+}
