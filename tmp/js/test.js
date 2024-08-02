@@ -1,1 +1,0 @@
-!function(){for(var e,t=document.createTreeWalker(document,NodeFilter.SHOW_TEXT);e=t.nextNode();)e.textContent.trim().length&&(e.textContent="Одиннадцатиклассница пошла посмотреть на достопримечательность, она шла долго, несколько строчек, пока не пришла")}();
