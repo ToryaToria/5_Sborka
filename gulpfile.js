@@ -13,10 +13,9 @@ import csso from 'postcss-csso';
 import gcssmq from 'gulp-group-css-media-queries';
 
 import terser from 'gulp-terser';
-// import concat from 'gulp-concat';
+import concat from 'gulp-concat';
 
-// import squoosh from 'gulp-libsquoosh';
-
+// import sharp from 'gulp-sharp-responsive';
 
 
 
@@ -107,12 +106,12 @@ export const cssMinif = () => {
 export const jsMinif = () => {
   return gulp.src('source/js/*.js')
     .pipe(terser())
-    // .pipe(concat('index.js')) // Конкатенируем в один файл
+    .pipe(concat('index.js')) // Конкатенируем в один файл
     .pipe(notify('MinJs'))
     .pipe(gulp.dest('tmp/js'))
   }
 
-  export const minif = gulp.series(htmlMinif, cssMinif, jsMinif);
+  export const minif = gulp.parallel(htmlMinif, cssMinif, jsMinif);
 
 
 
@@ -120,10 +119,14 @@ export const jsMinif = () => {
 
 // Images
 
-// export const optimizeImages = () => {
-//   return gulp.src('source/img/**/*.{png,jpg}')
-//     // .pipe(squoosh())
-//     .pipe(notify('Optim_png&jpg'))
 
-//     .pipe(gulp.dest('tmp/img'))
-// }
+
+
+
+export const copyImages = () => {
+  return gulp.src('source/img/**/*.{png,jpg}')
+
+  // .pipe(notify('MincopyPng&Jpg'))
+
+  .pipe(gulp.dest('tmp/img'))
+  }
