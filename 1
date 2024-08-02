@@ -112,18 +112,15 @@ export const jsMinif = () => {
     .pipe(gulp.dest('tmp/js'))
   }
 
-  export const minif = gulp.series(htmlMinif, cssMinif, jsMinif);
-
-
 
 // =============== отпимизация изображений ============
 
 // Images
 
-// export const optimizeImages = () => {
-//   return gulp.src('source/img/**/*.{png,jpg}')
-//     // .pipe(squoosh())
-//     .pipe(notify('Optim_png&jpg'))
+export const optimizeImages = () => {
+  return gulp.src('source/img/**/*.{png,jpg}')
+    // .pipe(squoosh())
+    .pipe(notify('Optim_png&jpg'))
 
-//     .pipe(gulp.dest('tmp/img'))
-// }
+    .pipe(gulp.dest('tmp/img'))
+}

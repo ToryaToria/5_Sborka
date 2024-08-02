@@ -20,17 +20,22 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp"
+    "start": "gulp",
+    "minif": "gulp minif"
+
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "browser-sync": "^3.0.2",
     "gulp": "^5.0.0",
     "gulp-dart-sass": "^1.1.0",
+    "gulp-group-css-media-queries": "^1.2.2",
     "gulp-htmlmin": "^5.0.1",
+    "gulp-libsquoosh": "^1.1.2",
     "gulp-notify": "^4.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^10.0.0",
+    "gulp-terser": "^2.1.0",
     "postcss-csso": "^6.0.1"
   }
 }
