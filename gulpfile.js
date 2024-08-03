@@ -17,6 +17,12 @@ import concat from 'gulp-concat';
 
 // import sharp from 'gulp-sharp-responsive';
 
+import imagemin, {
+  gifsicle,
+  mozjpeg,
+  optipng,
+  svgo
+} from 'gulp-imagemin';
 
 
 // Styles
@@ -109,9 +115,9 @@ export const jsMinif = () => {
     .pipe(concat('index.js')) // Конкатенируем в один файл
     .pipe(notify('MinJs'))
     .pipe(gulp.dest('tmp/js'))
-  }
+}
 
-  export const minif = gulp.parallel(htmlMinif, cssMinif, jsMinif);
+export const minif = gulp.parallel(htmlMinif, cssMinif, jsMinif);
 
 
 
@@ -120,13 +126,57 @@ export const jsMinif = () => {
 // Images
 
 
+export function imgOpt() {
+  // return gulp.src('source/**/*.{png,jpg,svg}')
+  return gulp.src('img_test/src/*.{png,jpg,svg}')
+
+  .pipe(imagemin())
+
+    // .pipe(imagemin([
+    //   gifsicle({ //для gif
+    //     interlaced: true  // чересстрочная развертка
+    //   }),
+    //   mozjpeg({ //для jpg
+    //     quality: 75, //Качество сжатия в диапазоне от 0 (наихудшее) до 100 (идеальное).
+    //     progressive: true  //прогрессивность, false создает базовый файл JPEG
+
+    //   }),
+    //   optipng({
+    //     optimizationLevel: 3//уровень оптимизации от 0 до 7.
+    //   }),
+    //   svgo({
+    //     plugins: [{
+    //       name: 'cleanupIDs',
+    //       active: false
+    //     }, {
+    //       name: 'preset-default', // предустановленные настройки по умолчанию
+    //       params: {
+    //         overrides: {
+    //           // настройка параметров:
+    //           convertPathData: {
+    //             floatPrecision: 2,
+    //             forceAbsolutePath: false,
+    //             utilizeAbsolute: false,
+    //           },
+    //           // отключить плагин
+    //           removeViewBox: false,
+    //         },
+    //       },
+    //     }]
+    //   })
+    // ]))
+    .pipe(gulp.dest('img_test/build'));
+}
+
+
+
 
 
 
 export const copyImages = () => {
   return gulp.src('source/img/**/*.{png,jpg}')
 
-  // .pipe(notify('MincopyPng&Jpg'))
+    // .pipe(notify('MincopyPng&Jpg'))
 
-  .pipe(gulp.dest('tmp/img'))
-  }
+    .pipe(gulp.dest('tmp/img'))
+}
