@@ -8,6 +8,8 @@
 *.sublime*
 node_modules/
 tmp/
+webp/
+img_test/build
 npm-debug.*
 source/css/*.css
 source/css/*.map
