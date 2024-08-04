@@ -202,17 +202,14 @@ export function imgOpt() {
 // }
 
 export function createWebp() {
-    return gulp.src('img_test/src/*.{png,jpg}')
+    return gulp.src('img_test/build/*.{png,jpg}')
     .pipe(notify('createWebp'))
 
 		.pipe(webpConv())
     // .pipe(cwebp())
 
-    .pipe(gulp.dest('webp'));
+    .pipe(gulp.dest('img_test/webp'));
 }
-
-
-
 
 
 export const copyImages = () => {
@@ -222,3 +219,6 @@ export const copyImages = () => {
 
     .pipe(gulp.dest('tmp/img'))
 }
+
+
+export const optim = gulp.series(imgOpt, createWebp);

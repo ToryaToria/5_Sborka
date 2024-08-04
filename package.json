@@ -21,7 +21,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp",
-    "minif": "gulp minif"
+    "minif": "gulp minif",
+    "optim": "gulp optim"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
