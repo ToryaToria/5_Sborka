@@ -2,7 +2,7 @@
   "name": "5_sborka",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -27,9 +27,8 @@
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "browser-sync": "^3.0.2",
-    "gulp": "^5.0.0",
+    "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
-    "gulp-cwebp": "^4.0.2",
     "gulp-dart-sass": "^1.1.0",
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-htmlmin": "^5.0.1",
@@ -38,8 +37,8 @@
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^10.0.0",
     "gulp-sharp-responsive": "^0.4.1",
+    "gulp-stacksvg": "^4.0.0",
     "gulp-terser": "^2.1.0",
-    "gulp-webp": "^5.0.0",
     "import": "^0.0.6",
     "postcss-csso": "^6.0.1"
   }

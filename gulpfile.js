@@ -5,7 +5,6 @@ import notify from 'gulp-notify';
 import browser from 'browser-sync';
 
 import htmlmin from 'gulp-htmlmin';
-//  import htmlmin from 'html-minifier';
 
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -15,12 +14,10 @@ import gcssmq from 'gulp-group-css-media-queries';
 import terser from 'gulp-terser';
 import concat from 'gulp-concat';
 
-// import sharpResponsive from 'gulp-sharp-responsive';
+import sharp from 'gulp-sharp-responsive';
 
-import webpConv from 'gulp-webp';
+import { stacksvg } from 'gulp-stacksvg';
 
-
-// const cwebp = require('gulp-cwebp');
 
 import imagemin, {
   gifsicle,
@@ -134,9 +131,7 @@ export const minif = gulp.parallel(htmlMinif, cssMinif, jsMinif);
 
 export function imgOpt() {
   // return gulp.src('source/**/*.{png,jpg,svg}')
-  return gulp.src('img_test/src/*.{png,jpg,svg}')
-
-    // .pipe(imagemin())
+  return gulp.src('img_test/**/*.{png,jpg,svg}')
 
     .pipe(imagemin([
       // gifsicle({ //для gif
@@ -176,49 +171,67 @@ export function imgOpt() {
       })
     ]))
     .pipe(notify('imgOpt'))
-    .pipe(gulp.dest('img_test/build'));
+    .pipe(gulp.dest('build/'));
 }
 
+// ретинизация + webp +webp@2x
 
-// сделать webp
+export function retinaWebp() {
+	return gulp.src('build/**/*.{png,jpg}')
+		.pipe(sharp({
+			includeOriginalFile: true,
+			formats: [{
+				width: (metadata) => metadata.width * 2,
+				rename: {
+					suffix: "@2x"
+				},
+				jpegOptions: {
+					progressive: true
+				},
+			}, {
+				width: (metadata) => metadata.width * 2,
+				format: "webp",
+				rename: {
+					suffix: "@2x"
+				}
+			}, {
+				format: "webp"
+			}, ]
+		}))
 
-// export function createWebp() {
-//   // return src([paths.img.resource + "/**/*.{jpg,png}"])
-
-//   return gulp.src('img_test/src/*.{png,jpg}')
-
-//     .pipe(sharpResponsive({ //генерация малого и большого размера изображений
-//       formats: [
-//         { width: 640, rename: { suffix: "-sm" } },
-//         { width: 1024, rename: { suffix: "-lg" } },
-//         // { width: (metadata), format: "webp" }
-//       ]
-
-//     }))
-
-//     .pipe(notify('createWebp'))
-
-//     .pipe(gulp.dest('webp'));
-// }
-
-export function createWebp() {
-    return gulp.src('img_test/build/*.{png,jpg}')
-    .pipe(notify('createWebp'))
-
-		.pipe(webpConv())
-    // .pipe(cwebp())
-
-    .pipe(gulp.dest('img_test/webp'));
+    .pipe(notify('оптимизация!'))
+    .pipe(gulp.dest('build/opt_2x'));
 }
 
+export function createStack() {
+	return gulp.src('build/icons/*.svg')
+		// .pipe(imagemin([svgo({
+		// 	plugins: [{
+		// 		name: 'cleanupIDs',
+		// 		active: false
+		// 	}, {
+		// 		name: 'preset-default',
+		// 		params: {
+		// 			overrides: {
+		// 				// customize options for plugins included in preset
+		// 				convertPathData: {
+		// 					floatPrecision: 2,
+		// 					forceAbsolutePath: false,
+		// 					utilizeAbsolute: false,
+		// 				},
+		// 				// or disable plugins
+		// 				removeViewBox: false,
+		// 			},
+		// 		},
+		// 	}]
+		// })]))
 
-export const copyImages = () => {
-  return gulp.src('source/img/**/*.{png,jpg}')
+		    .pipe(stacksvg())
 
-    // .pipe(notify('MincopyPng&Jpg'))
+    .pipe(notify('стек!'))
 
-    .pipe(gulp.dest('tmp/img'))
+		.pipe (gulp.dest('build/stek'));
 }
 
+export const optim = gulp.series(imgOpt, createStack, retinaWebp);
 
-export const optim = gulp.series(imgOpt, createWebp);
