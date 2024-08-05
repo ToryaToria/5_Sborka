@@ -5,6 +5,7 @@ import notify from 'gulp-notify';
 import browser from 'browser-sync';
 
 import htmlmin from 'gulp-htmlmin';
+import cache from 'gulp-cache';
 
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -27,7 +28,10 @@ import imagemin, {
 } from 'gulp-imagemin';
 
 
-// Styles
+import bemlinter from 'gulp-html-bemlinter';
+
+
+// Sass to css
 
 export const scssToCss = () => { //переводит синтаксис SASS в стандартный CSS;
   return gulp.src('source/sass/style.scss', { sourcemaps: true }) //обращается к исходному файлу style.scss;
@@ -109,7 +113,7 @@ export const cssMinif = () => {
 }
 
 
-// jsMinif
+// jsMin
 
 export const jsMinif = () => {
   return gulp.src('source/js/*.js')
@@ -133,12 +137,12 @@ export function imgOpt() {
   // return gulp.src('source/**/*.{png,jpg,svg}')
   return gulp.src('img_test/**/*.{png,jpg,svg}')
 
-    .pipe(imagemin([
+    .pipe(cache(imagemin([
       // gifsicle({ //для gif
       //   interlaced: true  // чересстрочная развертка
       // }),
 
-     mozjpeg({ //для jpg
+      mozjpeg({ //для jpg
 
         quality: 75, //Качество сжатия в диапазоне от 0 (наихудшее) до 100 (идеальное).
         progressive: true  //прогрессивность, false создает базовый файл JPEG
@@ -147,7 +151,7 @@ export function imgOpt() {
       optipng({
         optimizationLevel: 3//уровень оптимизации от 0 до 7.
       }
-  ),
+      ),
 
       svgo({
         plugins: [{
@@ -169,7 +173,7 @@ export function imgOpt() {
           },
         }]
       })
-    ]))
+    ])))
     .pipe(notify('imgOpt'))
     .pipe(gulp.dest('build/'));
 }
@@ -177,61 +181,48 @@ export function imgOpt() {
 // ретинизация + webp +webp@2x
 
 export function retinaWebp() {
-	return gulp.src('build/**/*.{png,jpg}')
-		.pipe(sharp({
-			includeOriginalFile: true,
-			formats: [{
-				width: (metadata) => metadata.width * 2,
-				rename: {
-					suffix: "@2x"
-				},
-				jpegOptions: {
-					progressive: true
-				},
-			}, {
-				width: (metadata) => metadata.width * 2,
-				format: "webp",
-				rename: {
-					suffix: "@2x"
-				}
-			}, {
-				format: "webp"
-			}, ]
-		}))
+
+  return gulp.src('build/**/*.{png,jpg}')
+    .pipe(sharp({
+      includeOriginalFile: true,
+      formats: [{
+        width: (metadata) => metadata.width * 2,
+        rename: {
+          suffix: "@2x"
+        },
+        jpegOptions: {
+          progressive: true
+        },
+      }, {
+        width: (metadata) => metadata.width * 2,
+        format: "webp",
+        rename: {
+          suffix: "@2x"
+        }
+      }, {
+        format: "webp"
+      },]
+    }))
+    .pipe(gulp.dest('build/opt_2x'))
 
     .pipe(notify('оптимизация!'))
-    .pipe(gulp.dest('build/opt_2x'));
 }
 
 export function createStack() {
-	return gulp.src('build/icons/*.svg')
-		// .pipe(imagemin([svgo({
-		// 	plugins: [{
-		// 		name: 'cleanupIDs',
-		// 		active: false
-		// 	}, {
-		// 		name: 'preset-default',
-		// 		params: {
-		// 			overrides: {
-		// 				// customize options for plugins included in preset
-		// 				convertPathData: {
-		// 					floatPrecision: 2,
-		// 					forceAbsolutePath: false,
-		// 					utilizeAbsolute: false,
-		// 				},
-		// 				// or disable plugins
-		// 				removeViewBox: false,
-		// 			},
-		// 		},
-		// 	}]
-		// })]))
+  return gulp.src('build/icons/*.svg')
 
-		    .pipe(stacksvg())
+    .pipe(stacksvg())
 
     .pipe(notify('стек!'))
 
-		.pipe (gulp.dest('build/stek'));
+    .pipe(gulp.dest('build/stek'));
 }
 
 export const optim = gulp.series(imgOpt, createStack, retinaWebp);
 
+// Линты
+// Линты из требований Д19 и Д20 в package.json, проверка валидации там же
+export function lintBem() {
+  return gulp.src('source/**/*.html')
+    .pipe(bemlinter());
+}

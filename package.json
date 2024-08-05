@@ -22,15 +22,33 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp",
     "minif": "gulp minif",
-    "optim": "gulp optim"
+    "optim": "gulp optim",
+    "bemlint": "gulp lintBem --silent",
+
+    "w3cvalidator": "html-validator --quiet",
+
+    "editorconfig": "editorconfig-cli",
+    "stylelint": "stylelint \"source/**/*.scss\" --syntax scss",
+    "lint": "npm run editorconfig && npm run stylelint"
   },
+  "editorconfig-cli": [
+    "*.json",
+    "*.js",
+    "source/*.html",
+    "source/js/**/*.js",
+    "source/img/**/*.svg",
+    "source/sass/**/*.scss"
+  ],
   "devDependencies": {
+    "@htmlacademy/editorconfig-cli": "^1.0.0",
     "autoprefixer": "^10.4.19",
     "browser-sync": "^3.0.2",
     "gulp": "^4.0.2",
+    "gulp-cache": "^1.1.3",
     "gulp-concat": "^2.6.1",
     "gulp-dart-sass": "^1.1.0",
     "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-html-bemlinter": "^4.0.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^9.1.0",
     "gulp-notify": "^0.4.1",
@@ -40,6 +58,9 @@
     "gulp-stacksvg": "^4.0.0",
     "gulp-terser": "^2.1.0",
     "import": "^0.0.6",
-    "postcss-csso": "^6.0.1"
+    "postcss-csso": "^6.0.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-htmlacademy": "^0.1.11",
+    "w3c-html-validator": "^1.8.1"
   }
 }
