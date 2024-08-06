@@ -6,6 +6,7 @@ import browser from 'browser-sync';
 
 import htmlmin from 'gulp-htmlmin';
 import cache from 'gulp-cache';
+import changed from 'gulp-change';
 
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
@@ -72,9 +73,9 @@ const reload = (done) => {
 
 const watcher = () => {
   gulp.watch('source/sass/**/*.scss', gulp.series(scssToCss));
+  gulp.watch('source/*.html', gulp.series(reload));
 
   // gulp.watch('source/js/script.js', gulp.series(scripts));
-  gulp.watch('source/*.html', gulp.series(reload));
   // gulp.watch(`source/icons/**/*.svg`, series(createStack, reloadServer));
 }
 
@@ -92,7 +93,7 @@ export const htmlMinif = () => {
       collapseWhitespace: true
     }))
     .pipe(notify('MinHtml'))
-    .pipe(gulp.dest('tmp'));
+    .pipe(gulp.dest('build'));
 }
 
 
@@ -109,7 +110,7 @@ export const cssMinif = () => {
     ]))
     // .pipe(rename('style.min.css'))
     .pipe(notify('MinCss'))
-    .pipe(gulp.dest('tmp/css', { sourcemaps: '.' }))  //сохраняет итоговый файл в папку /tmp/css/
+    .pipe(gulp.dest('build/css', { sourcemaps: '.' }))  //сохраняет итоговый файл в папку /build/css/
 }
 
 
@@ -120,7 +121,7 @@ export const jsMinif = () => {
     .pipe(terser())
     .pipe(concat('index.js')) // Конкатенируем в один файл
     .pipe(notify('MinJs'))
-    .pipe(gulp.dest('tmp/js'))
+    .pipe(gulp.dest('build/js'))
 }
 
 export const minif = gulp.parallel(htmlMinif, cssMinif, jsMinif);
@@ -135,7 +136,7 @@ export const minif = gulp.parallel(htmlMinif, cssMinif, jsMinif);
 
 export function imgOpt() {
   // return gulp.src('source/**/*.{png,jpg,svg}')
-  return gulp.src('img_test/**/*.{png,jpg,svg}')
+  return gulp.src('source/img/img_test/**/*.{png,jpg,svg}')
 
     .pipe(cache(imagemin([
       // gifsicle({ //для gif
@@ -181,8 +182,8 @@ export function imgOpt() {
 // ретинизация + webp +webp@2x
 
 export function retinaWebp() {
-
-  return gulp.src('build/**/*.{png,jpg}')
+    return gulp.src('build/**/*.{png,jpg}')
+    .pipe(changed('build/**/*.{png,jpg}',{ extension: '.webp'}))
     .pipe(sharp({
       includeOriginalFile: true,
       formats: [{
