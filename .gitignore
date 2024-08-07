@@ -13,6 +13,7 @@ img_test/build
 img_test/webp
 
 npm-debug.*
-source/css/*.css
-source/css/*.map
+
+build/
+
 Thumbs.db

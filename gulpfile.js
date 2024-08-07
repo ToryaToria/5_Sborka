@@ -5,6 +5,8 @@ import notify from 'gulp-notify';
 import browser from 'browser-sync';
 
 import htmlmin from 'gulp-htmlmin';
+import rename from 'gulp-rename';
+
 import cache from 'gulp-cache';
 import changed from 'gulp-change';
 
@@ -20,9 +22,10 @@ import sharp from 'gulp-sharp-responsive';
 
 import { stacksvg } from 'gulp-stacksvg';
 
+import delet from 'del';
+
 
 import imagemin, {
-  gifsicle,
   mozjpeg,
   optipng,
   svgo
@@ -34,7 +37,7 @@ import bemlinter from 'gulp-html-bemlinter';
 
 // Sass to css
 
-export const scssToCss = () => { //переводит синтаксис SASS в стандартный CSS;
+export function scssToCss() { //переводит синтаксис SASS в стандартный CSS;
   return gulp.src('source/sass/style.scss', { sourcemaps: true }) //обращается к исходному файлу style.scss;
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError)) //показывает в терминале информацию о наличии ошибок в исходном файле;
@@ -46,7 +49,7 @@ export const scssToCss = () => { //переводит синтаксис SASS в
 
 // Server
 
-const server = (done) => {
+export function server(done) {
   browser.init({ //инициализируем веб-сервер;
     server: {
       baseDir: 'source', // указываем рабочую папку;
@@ -64,18 +67,18 @@ const server = (done) => {
 
 // Reload
 
-const reload = (done) => {
+export function reload(done) {
   browser.reload();
   done();
 }
 
 // Watcher
 
-const watcher = () => {
-  gulp.watch('source/sass/**/*.scss', gulp.series(scssToCss));
-  gulp.watch('source/*.html', gulp.series(reload));
+export function watcher() {
+  gulp.watch('source/sass/**/*.scss', gulp.series(scssToCss, cssMinif));
+  gulp.watch('source/*.html', gulp.series(htmlMinif, reload));
 
-  // gulp.watch('source/js/script.js', gulp.series(scripts));
+  gulp.watch('source/js/*.js', gulp.series(jsMinif));
   // gulp.watch(`source/icons/**/*.svg`, series(createStack, reloadServer));
 }
 
@@ -85,7 +88,7 @@ export default gulp.series(scssToCss, server, watcher);
 
 // html-MIN
 
-export const htmlMinif = () => {
+export function htmlMinif() {
   return gulp.src('source/*.html')
     .pipe(plumber())
     .pipe(htmlmin({
@@ -99,7 +102,7 @@ export const htmlMinif = () => {
 
 // css-MIN
 
-export const cssMinif = () => {
+export function cssMinif() {
   return gulp.src('source/css/*.css', { sourcemaps: true })
     .pipe(plumber())  //Надо?
     .pipe(gcssmq()) // группирует вместе все медиавыражения и размещает их в конце файла;
@@ -108,7 +111,13 @@ export const cssMinif = () => {
       autoprefixer(), //добавляет вендорные префиксы CSS
       csso()
     ]))
-    // .pipe(rename('style.min.css'))
+    .pipe(rename('style-min.css'))
+
+    // .pipe(rename({
+    //  basename: 'style',
+    //  suffix: '-min'
+    // }))
+
     .pipe(notify('MinCss'))
     .pipe(gulp.dest('build/css', { sourcemaps: '.' }))  //сохраняет итоговый файл в папку /build/css/
 }
@@ -116,10 +125,15 @@ export const cssMinif = () => {
 
 // jsMin
 
-export const jsMinif = () => {
+export function jsMinif() {
   return gulp.src('source/js/*.js')
     .pipe(terser())
     .pipe(concat('index.js')) // Конкатенируем в один файл
+
+    .pipe(rename({
+      suffix: '-min'
+    }))
+
     .pipe(notify('MinJs'))
     .pipe(gulp.dest('build/js'))
 }
@@ -139,10 +153,6 @@ export function imgOpt() {
   return gulp.src('source/img/img_test/**/*.{png,jpg,svg}')
 
     .pipe(cache(imagemin([
-      // gifsicle({ //для gif
-      //   interlaced: true  // чересстрочная развертка
-      // }),
-
       mozjpeg({ //для jpg
 
         quality: 75, //Качество сжатия в диапазоне от 0 (наихудшее) до 100 (идеальное).
@@ -182,8 +192,8 @@ export function imgOpt() {
 // ретинизация + webp +webp@2x
 
 export function retinaWebp() {
-    return gulp.src('build/**/*.{png,jpg}')
-    .pipe(changed('build/**/*.{png,jpg}',{ extension: '.webp'}))
+  return gulp.src('build/**/*.{png,jpg}')
+    .pipe(changed('build/**/*.{png,jpg}', { extension: '.webp' }))
     .pipe(sharp({
       includeOriginalFile: true,
       formats: [{
@@ -227,3 +237,35 @@ export function lintBem() {
   return gulp.src('source/**/*.html')
     .pipe(bemlinter());
 }
+
+// конечная сборка. BUILD
+
+// del
+
+export const clean = () => {
+  return delet('build');
+};
+
+// copy - копирую в BUILD всё, что не изменяетя (шрифты, фавиконки)
+
+export function copy() {
+  return gulp.src(['source/fonts/**/*.{woff2,woff}',
+    'source/*.ico',
+  ], {
+    base: 'source'
+  }
+  )
+    .pipe(notify('копируем шрифты'))
+
+    .pipe(gulp.dest('build'))
+
+}
+
+
+// Build
+
+export const build = gulp.series(
+  clean,
+  copy,
+  minif
+)
